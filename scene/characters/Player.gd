@@ -8,10 +8,12 @@ var speed = 4000
 var velocity = Vector2.ZERO
 var dir_animation = "Down"
 var dir_last = Vector2.DOWN
+var state_anim_machine
 export (PackedScene) var Indicator
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	state_anim_machine = $AnimationTree.get("parameters/playback")
 	pass # Replace with function body.
 
 
@@ -44,9 +46,9 @@ func _physics_process(delta):
 			dir_animation = "Up"
 	if velocity != Vector2.ZERO:
 		dir_last = direction
-#		$AnimationPlayer.play(str("Walk_" + dir_animation))
+		$AnimationPlayer.play(str("Walk_" + dir_animation))
 	else:
-#		$AnimationPlayer.play(str("Idle_" + dir_animation))
+		$AnimationPlayer.play(str("Idle_" + dir_animation))
 		pass
 
 func walling(direction):
