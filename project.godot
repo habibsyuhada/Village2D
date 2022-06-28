@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="New Game Valley"
+config/name="  Valley 2D"
 run/main_scene="res://scene/maps/World.tscn"
 config/icon="res://icon.png"
 
