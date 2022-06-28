@@ -1,10 +1,52 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://assets/character/player.png" type="Texture" id=1]
 [ext_resource path="res://scene/characters/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7, 7 )
+
+[sub_resource type="Animation" id=95]
+resource_name = "Hoe_Down"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 21, 27 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hoe_process"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "Hoe_Left"
@@ -28,10 +70,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hoe_process"
+} ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -56,10 +112,66 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hoe_process"
+} ]
+}
+
+[sub_resource type="Animation" id=96]
+resource_name = "Hoe_Up"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 21, 27 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hoe_process"
+} ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -238,133 +350,122 @@ tracks/0/keys = {
 "values": [ 7, 10, 10 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=97]
+animation = "Hoe_Down"
+
+[sub_resource type="AnimationNodeAnimation" id=60]
 animation = "Hoe_Left"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=61]
 animation = "Hoe_Right"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=98]
+animation = "Hoe_Up"
+
+[sub_resource type="AnimationNodeAnimation" id=88]
 animation = "Idle_Down"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=62]
 animation = "Idle_Left"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=63]
 animation = "Idle_Right"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=64]
 animation = "Idle_Up"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=66]
 animation = "Walk_Down"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=67]
 animation = "Walk_Left"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=68]
 animation = "Walk_Right"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=69]
 animation = "Walk_Up"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
 switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
 switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=51]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=54]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=55]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=56]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
 
 [sub_resource type="AnimationNodeStateMachine" id=58]
-states/Hoe_Left/node = SubResource( 12 )
-states/Hoe_Left/position = Vector2( 339, 92 )
-states/Hoe_Right/node = SubResource( 13 )
-states/Hoe_Right/position = Vector2( 339, 182 )
-states/Idle_Down/node = SubResource( 14 )
-states/Idle_Down/position = Vector2( 593, 290 )
-states/Idle_Left/node = SubResource( 15 )
-states/Idle_Left/position = Vector2( 593, 92 )
-states/Idle_Right/node = SubResource( 16 )
-states/Idle_Right/position = Vector2( 593, 182 )
-states/Idle_Up/node = SubResource( 17 )
-states/Idle_Up/position = Vector2( 593, 400 )
-states/Walk_Down/node = SubResource( 18 )
-states/Walk_Down/position = Vector2( 974, 290 )
-states/Walk_Left/node = SubResource( 19 )
-states/Walk_Left/position = Vector2( 974, 92 )
-states/Walk_Right/node = SubResource( 20 )
-states/Walk_Right/position = Vector2( 974, 182 )
-states/Walk_Up/node = SubResource( 21 )
-states/Walk_Up/position = Vector2( 974, 400 )
-transitions = [ "Hoe_Left", "Idle_Left", SubResource( 22 ), "Hoe_Right", "Idle_Right", SubResource( 23 ), "Idle_Left", "Hoe_Left", SubResource( 24 ), "Idle_Right", "Hoe_Right", SubResource( 25 ), "Idle_Left", "Walk_Left", SubResource( 26 ), "Walk_Left", "Idle_Left", SubResource( 27 ), "Idle_Right", "Walk_Right", SubResource( 28 ), "Walk_Right", "Idle_Right", SubResource( 29 ), "Idle_Left", "Walk_Right", SubResource( 30 ), "Idle_Left", "Walk_Down", SubResource( 31 ), "Idle_Left", "Walk_Up", SubResource( 32 ), "Idle_Right", "Walk_Left", SubResource( 33 ), "Idle_Right", "Walk_Down", SubResource( 34 ), "Idle_Right", "Walk_Up", SubResource( 35 ), "Idle_Down", "Walk_Left", SubResource( 36 ), "Idle_Down", "Walk_Right", SubResource( 37 ), "Idle_Down", "Walk_Down", SubResource( 38 ), "Idle_Down", "Walk_Up", SubResource( 39 ), "Idle_Up", "Walk_Left", SubResource( 40 ), "Idle_Up", "Walk_Right", SubResource( 41 ), "Idle_Up", "Walk_Down", SubResource( 42 ), "Idle_Up", "Walk_Up", SubResource( 43 ), "Walk_Up", "Idle_Up", SubResource( 44 ), "Walk_Down", "Idle_Down", SubResource( 45 ), "Walk_Left", "Walk_Right", SubResource( 46 ), "Walk_Left", "Walk_Down", SubResource( 47 ), "Walk_Left", "Walk_Up", SubResource( 48 ), "Walk_Right", "Walk_Left", SubResource( 49 ), "Walk_Right", "Walk_Down", SubResource( 50 ), "Walk_Right", "Walk_Up", SubResource( 51 ), "Walk_Down", "Walk_Left", SubResource( 52 ), "Walk_Down", "Walk_Right", SubResource( 53 ), "Walk_Down", "Walk_Up", SubResource( 54 ), "Walk_Up", "Walk_Left", SubResource( 55 ), "Walk_Up", "Walk_Right", SubResource( 56 ), "Walk_Up", "Walk_Down", SubResource( 57 ) ]
+states/Hoe_Down/node = SubResource( 97 )
+states/Hoe_Down/position = Vector2( -620.876, -378.879 )
+states/Hoe_Left/node = SubResource( 60 )
+states/Hoe_Left/position = Vector2( 496.646, -380.296 )
+states/Hoe_Right/node = SubResource( 61 )
+states/Hoe_Right/position = Vector2( -46.1005, -379.556 )
+states/Hoe_Up/node = SubResource( 98 )
+states/Hoe_Up/position = Vector2( -1231.86, -373.543 )
+states/Idle_Down/node = SubResource( 88 )
+states/Idle_Down/position = Vector2( -619.987, -509.185 )
+states/Idle_Left/node = SubResource( 62 )
+states/Idle_Left/position = Vector2( 496.457, -505.333 )
+states/Idle_Right/node = SubResource( 63 )
+states/Idle_Right/position = Vector2( -45.7652, -504.889 )
+states/Idle_Up/node = SubResource( 64 )
+states/Idle_Up/position = Vector2( -1230.21, -505.333 )
+states/Walk_Down/node = SubResource( 66 )
+states/Walk_Down/position = Vector2( -619.317, -638.223 )
+states/Walk_Left/node = SubResource( 67 )
+states/Walk_Left/position = Vector2( 496.683, -638.223 )
+states/Walk_Right/node = SubResource( 68 )
+states/Walk_Right/position = Vector2( -44.6507, -638.223 )
+states/Walk_Up/node = SubResource( 69 )
+states/Walk_Up/position = Vector2( -1228.65, -636.89 )
+transitions = [ "Walk_Up", "Idle_Up", SubResource( 70 ), "Idle_Up", "Walk_Up", SubResource( 71 ), "Walk_Right", "Idle_Right", SubResource( 74 ), "Idle_Right", "Walk_Right", SubResource( 75 ), "Idle_Left", "Walk_Left", SubResource( 76 ), "Walk_Left", "Idle_Left", SubResource( 77 ), "Walk_Up", "Walk_Down", SubResource( 82 ), "Walk_Down", "Walk_Right", SubResource( 83 ), "Walk_Right", "Walk_Left", SubResource( 84 ), "Walk_Left", "Walk_Right", SubResource( 85 ), "Walk_Right", "Walk_Down", SubResource( 86 ), "Walk_Down", "Walk_Up", SubResource( 87 ), "Walk_Down", "Idle_Down", SubResource( 89 ), "Idle_Down", "Walk_Down", SubResource( 90 ), "Idle_Right", "Hoe_Right", SubResource( 91 ), "Idle_Left", "Hoe_Left", SubResource( 92 ), "Hoe_Right", "Idle_Right", SubResource( 93 ), "Hoe_Left", "Idle_Left", SubResource( 94 ), "Hoe_Up", "Idle_Up", SubResource( 99 ), "Hoe_Down", "Idle_Down", SubResource( 100 ), "Idle_Up", "Hoe_Up", SubResource( 101 ), "Idle_Down", "Hoe_Down", SubResource( 102 ) ]
 start_node = "Idle_Down"
+graph_offset = Vector2( -1345.64, -708.881 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=59]
 
@@ -377,14 +478,16 @@ texture = ExtResource( 1 )
 flip_h = true
 hframes = 7
 vframes = 4
-frame = 16
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hoe_Down = SubResource( 95 )
 anims/Hoe_Left = SubResource( 10 )
 anims/Hoe_Right = SubResource( 11 )
+anims/Hoe_Up = SubResource( 96 )
 anims/Idle_Down = SubResource( 6 )
 anims/Idle_Left = SubResource( 7 )
 anims/Idle_Right = SubResource( 8 )
@@ -397,4 +500,5 @@ anims/Walk_Up = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 58 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 59 )

@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="Storage_Item" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 0.711
+margin_top = 128.0
+margin_bottom = 0.0799866
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 384.0
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 640.0
+margin_bottom = 384.0
+rect_min_size = Vector2( 640, 384 )
+
+[node name="Chest" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 644.0
+margin_right = 1284.0
+margin_bottom = 384.0
+rect_min_size = Vector2( 640, 384 )

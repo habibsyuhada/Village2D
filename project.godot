@@ -11,12 +11,19 @@ config_version=4
 [application]
 
 config/name="  Valley 2D"
-run/main_scene="res://scene/maps/World.tscn"
+run/main_scene="res://scene/maps/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://scene/systems/Global.tscn"
+GUI="*res://scene/systems/GUI.tscn"
+MasterItem="*res://scene/systems/Master_Item.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [importer_defaults]
 
