@@ -33,7 +33,10 @@ func _physics_process(delta):
 	var cur_speed = speed
 	if Input.is_action_just_released("Space"):
 		isinaction = true
-		state_anim_machine.travel(str("Hoe_" + dir_animation))
+		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "hoe" :
+			state_anim_machine.travel(str("Hoe_" + dir_animation))
+		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "watercan" :
+			state_anim_machine.travel(str("Watering_" + dir_animation))
 	if !isinaction:
 		velocity = direction.normalized() * cur_speed * delta
 		move_and_slide(velocity)
@@ -58,7 +61,14 @@ func _physics_process(delta):
 
 func hoe_process():
 	var map_tile = Global.world_tile_lv2.world_to_map(Global.indicator_player.position)
-	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [-1]):
+	if(Global.world_tile.get_cell(map_tile.x, map_tile.y) in [0] and Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [-1]):
 		Global.world_tile_lv2.set_cell(map_tile.x, map_tile.y, 1)
 		Global.world_tile_lv2.update_bitmask_area (map_tile)
+	isinaction = false
+
+func watering_process():
+	var map_tile = Global.world_tile_lv3.world_to_map(Global.indicator_player.position)
+	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [1] and Global.world_tile_lv3.get_cell(map_tile.x, map_tile.y) in [-1]):
+		Global.world_tile_lv3.set_cell(map_tile.x, map_tile.y, 2)
+		Global.world_tile_lv3.update_bitmask_area (map_tile)
 	isinaction = false

@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Global="*res://scene/systems/Global.tscn"
 GUI="*res://scene/systems/GUI.tscn"
 MasterItem="*res://scene/systems/Master_Item.gd"
+TransitionBackground="*res://scene/systems/TransitionBackground.tscn"
 
 [display]
 

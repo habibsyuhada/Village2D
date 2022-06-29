@@ -11,6 +11,7 @@ onready var world_tile = get_node_or_null("/root/World/Navigation2D/Level1")
 onready var world_tile_lv2 = get_node_or_null("/root/World/Navigation2D/Level2")
 onready var world_tile_lv3 = get_node_or_null("/root/World/Navigation2D/Level3")
 onready var indicator_player = get_node_or_null("/root/World/Indicator")
+onready var transition_background = get_node_or_null('/root/TransitionBackground/TransitionBackground/AnimationPlayer')
 
 var player = {
 	"item_index_used" : 1,
@@ -21,6 +22,7 @@ var current_scene = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	transition_background.play("Fade")
 	randomize()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -49,22 +51,23 @@ func new_games_process():
 	if file.file_exists(save_path):
 		var dir = Directory.new()
 		dir.remove(save_path)
-		for i in 18:
-			if i == 0 :
-				inventory[(i+1)] = {
-					"item_id": "hoe",
-					"item_qty": 1,
-				}
-			elif i == 1 :
-				inventory[(i+1)] = {
-					"item_id": "watercan",
-					"item_qty": 1,
-				}
-			else:
-				inventory[(i+1)] = {
-					"item_id": null,
-					"item_qty": 0,
-				}
+	for i in 18:
+		if i == 0 :
+			inventory[(i+1)] = {
+				"item_id": "hoe",
+				"item_qty": 1,
+			}
+		elif i == 1 :
+			inventory[(i+1)] = {
+				"item_id": "watercan",
+				"item_qty": 1,
+			}
+		else:
+			inventory[(i+1)] = {
+				"item_id": null,
+				"item_qty": 0,
+			}
+			
 	goto_scene("res://scene/maps/World.tscn")
 
 func save_data():
@@ -173,6 +176,8 @@ func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
 
 func _deferred_goto_scene(path):
+	transition_background.play_backwards("Fade")
+	yield(transition_background, "animation_finished")
 	# It is now safe to remove the current scene
 	current_scene.free()
 
@@ -191,3 +196,5 @@ func _deferred_goto_scene(path):
 	world_tile_lv2 = get_node_or_null("/root/World/Navigation2D/Level2")
 	world_tile_lv3 = get_node_or_null("/root/World/Navigation2D/Level3")
 	indicator_player = get_node_or_null("/root/World/Indicator")
+	transition_background.play("Fade")
+	yield(transition_background, "animation_finished")

@@ -8,6 +8,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Camera2D.add_target($Player)
+	GUI.open_hud()
 	pass # Replace with function body.
 
 
