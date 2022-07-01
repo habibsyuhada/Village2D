@@ -11,14 +11,22 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 margin_top = 40.0
 margin_bottom = 88.0
+custom_constants/separation = 16
 alignment = 1
 
 [node name="Close_Menu_Button" type="Button" parent="HBoxContainer"]
-margin_left = 590.0
-margin_right = 690.0
+margin_left = 532.0
+margin_right = 632.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 100, 0 )
 text = "CLOSE"
+
+[node name="Save_Menu_Button" type="Button" parent="HBoxContainer"]
+margin_left = 648.0
+margin_right = 748.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 100, 0 )
+text = "SAVE"
 
 [node name="Inventory" type="Control" parent="."]
 anchor_top = 0.177778
@@ -29,3 +37,4 @@ __meta__ = {
 }
 
 [connection signal="button_up" from="HBoxContainer/Close_Menu_Button" to="." method="_on_Close_Menu_Button_button_up"]
+[connection signal="button_up" from="HBoxContainer/Save_Menu_Button" to="." method="_on_Save_Menu_Button_button_up"]

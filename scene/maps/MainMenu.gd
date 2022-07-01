@@ -21,4 +21,4 @@ func _on_New_Button_button_up():
 
 
 func _on_Load_Button_button_up():
-	pass # Replace with function body.
+	Global.load_games_process()

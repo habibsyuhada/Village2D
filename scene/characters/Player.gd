@@ -15,8 +15,19 @@ export (PackedScene) var Indicator
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_anim_machine = $AnimationTree.get("parameters/playback")
+	var temp_indicator = Indicator.instance()
+	temp_indicator.position = position
+	$"/root/World".add_child(temp_indicator)
+	Global.move_indicator(position, dir_last)
 	pass # Replace with function body.
 
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"cell_pos" : Global.world_tile.world_to_map(position),
+	}
+	return save_dict
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -31,6 +42,15 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("D"):
 		direction = Vector2.RIGHT
 	var cur_speed = speed
+	if Input.is_action_just_released("E"):
+		var scanned_by_indicator = Global.indicator_player.get_overlapping_bodies()
+		var take_item = null
+		for body in scanned_by_indicator:
+			if body != self:
+				take_item = body
+		if take_item != null and take_item.has_method("interact"):
+			take_item.interact()
+#		isinaction = true
 	if Input.is_action_just_released("Space"):
 		isinaction = true
 		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "hoe" :

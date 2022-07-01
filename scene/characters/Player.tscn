@@ -1,7 +1,8 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://assets/character/player.png" type="Texture" id=1]
 [ext_resource path="res://scene/characters/Player.gd" type="Script" id=2]
+[ext_resource path="res://scene/characters/Indicator.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -681,8 +682,9 @@ graph_offset = Vector2( -1345.64, -708.881 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=59]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["Saved Object"]]
 script = ExtResource( 2 )
+Indicator = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -7 )

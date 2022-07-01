@@ -15,10 +15,13 @@ onready var transition_background = get_node_or_null('/root/TransitionBackground
 
 var player = {
 	"item_index_used" : 1,
+	"map_file" : '',
 }
 var inventory = {}
 var save_path = "user://file2.save"
 var current_scene = null
+var map_dynamic = {}
+var tile_dynamic = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,106 +31,74 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 #	first_setup()
 
-func first_setup():
-	for i in 18:
-		if i == 0 :
-			inventory[(i+1)] = {
-				"item_id": "hoe",
-				"item_qty": 1,
-			}
-		elif i == 1 :
-			inventory[(i+1)] = {
-				"item_id": "watercan",
-				"item_qty": 1,
-			}
-		else:
-			inventory[(i+1)] = {
-				"item_id": null,
-				"item_qty": 0,
-			}
-
 func new_games_process():
 	var file = File.new()
 	if file.file_exists(save_path):
 		var dir = Directory.new()
 		dir.remove(save_path)
 	for i in 18:
-		if i == 0 :
-			inventory[(i+1)] = {
-				"item_id": "hoe",
-				"item_qty": 1,
+		inventory[(i+1)] = {
+			"item_id": null,
+			"item_qty": 0,
+		}
+	var temp_slot = {}
+	for i in 18:
+		temp_slot[(i+1)] = {
+			"item_id": null,
+			"item_qty": 0,
+		}
+	temp_slot[1] = {
+		"item_id": "hoe",
+		"item_qty": 1,
+	}
+	temp_slot[2] = {
+		"item_id": "watercan",
+		"item_qty": 1,
+	}
+	temp_slot[3] = {
+		"item_id": "wortelseed",
+		"item_qty": 1,
+	}
+	map_dynamic = {
+		"farm" : [
+			{
+				"filename" : "res://scene/characters/Player.tscn",
+				"parent" : "/root/World",
+				"cell_pos" : Vector2(0, 0),
+			},{
+				"filename" : "res://scene/objects/Chest.tscn",
+				"parent" : "/root/World",
+				"cell_pos" : Vector2(3, 3),
+				"slot" : temp_slot,
 			}
-		elif i == 1 :
-			inventory[(i+1)] = {
-				"item_id": "watercan",
-				"item_qty": 1,
-			}
-		else:
-			inventory[(i+1)] = {
-				"item_id": null,
-				"item_qty": 0,
-			}
-			
+		]
+	}
+#	yield(goto_scene("res://scene/maps/World.tscn"), "completed")
 	goto_scene("res://scene/maps/World.tscn")
 
 func save_data():
 	var save_file = {
+		"player": player,
 		"inventory": inventory,
-		"dynamic_node": [],
+		"map_dynamic": map_dynamic,
 	}
-	
-	var save_nodes = get_tree().get_nodes_in_group("Saved Object")
-	for node in save_nodes:
-		# Check the node is an instanced scene so it can be instanced again during load.
-		if node.filename.empty():
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-			continue
-		# Check the node has a save function.
-		if !node.has_method("save"):
-			print("persistent node '%s' is missing a save() function, skipped" % node.name)
-			continue
-		# Call the node's save function.
-		var node_data = node.call("save")
-		save_file["dynamic_node"].push_back(node_data)
 	
 	var file = File.new()
 	file.open(save_path, File.WRITE)
 	file.store_var(save_file)
 	file.close()
 	print("GAME FILE SAVED")
-
-func load_data():
+	
+func load_games_process():
 	var file = File.new()
 	if file.file_exists(save_path):
 		file.open(save_path, File.READ)
 		var save_file = file.get_var()
 		file.close()
+		player = save_file["player"]
 		inventory = save_file["inventory"]
-		
-		# We need to revert the game state so we're not cloning objects
-		# during loading. This will vary wildly depending on the needs of a
-		# project, so take care with this step.
-		# For our example, we will accomplish this by deleting saveable objects.
-		var save_nodes = get_tree().get_nodes_in_group("Saved Object")
-		for i in save_nodes:
-			i.queue_free()
-		# Load the file line by line and process that dictionary to restore
-		# the object it represents.
-		for node_data in save_file["dynamic_node"]:
-			# Firstly, we need to create the object and add it to the tree and set its position.
-			var new_object = load(node_data["filename"]).instance()
-			get_node(node_data["parent"]).add_child(new_object)
-			new_object.global_transform = node_data["global_transform"]
-			# Now we set the remaining variables.
-			for i in node_data.keys():
-				if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
-					continue
-				if i == "grid_cells":
-					for cell in node_data[i]:
-						new_object.set_cell_item(cell["cell_pos"].x, cell["cell_pos"].y, cell["cell_pos"].z, cell["cell_item"])
-					continue
-				new_object.set(i, node_data[i])
-		
+		map_dynamic = save_file["map_dynamic"]
+		goto_scene(player["map_file"])
 		print("GAME FILE LOADED")
 
 func waits(s):
@@ -162,6 +133,8 @@ func move_indicator(player_pos, direction):
 	if(indicator_player):
 		var indicator_pos_map = world_tile.world_to_map(player_pos) + direction
 		indicator_player.position = world_tile.map_to_world(indicator_pos_map) + half_tile_vector
+	else:
+		indicator_player = get_node_or_null("/root/World/Indicator")
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -189,12 +162,52 @@ func _deferred_goto_scene(path):
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
-	get_tree().set_current_scene(current_scene)
 	world_tile = get_node_or_null("/root/World/Navigation2D/Level1")
 	world_tile_lv2 = get_node_or_null("/root/World/Navigation2D/Level2")
 	world_tile_lv3 = get_node_or_null("/root/World/Navigation2D/Level3")
 	indicator_player = get_node_or_null("/root/World/Indicator")
+
+	# Optionally, to make it compatible with the SceneTree.change_scene() API.
+	get_tree().set_current_scene(current_scene)
 	transition_background.play("Fade")
 	yield(transition_background, "animation_finished")
+
+func load_dynamic_node(name_var):
+	for node_data in map_dynamic[name_var]:
+		var new_object = load(node_data["filename"]).instance()
+		get_node(node_data["parent"]).add_child(new_object)
+		new_object.position = world_tile.map_to_world(node_data["cell_pos"]) + half_tile_vector
+		for i in node_data.keys():
+			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+				continue
+			new_object.set(i, node_data[i])
+	
+	if name_var in tile_dynamic:
+		for key in tile_dynamic[name_var].keys():
+			var node = get_node_or_null("/root/World/Navigation2D").find_node(key)
+			if node:
+				pass
+
+func save_dynamic_node(map):
+	player["map_file"] = map.get_filename()
+
+	var name_var = map.map_name
+	map_dynamic[name_var]  = []
+	var save_nodes = get_tree().get_nodes_in_group("Saved Object")
+	for node in save_nodes:
+		if node.filename.empty():
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+		if !node.has_method("save"):
+			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			continue
+		var node_data = node.call("save")
+		map_dynamic[name_var].push_back(node_data)
+		
+	var nav2d = map.find_node("Navigation2D")
+	if nav2d:
+		tile_dynamic[name_var]  = {}
+		for node in nav2d.get_children():
+			tile_dynamic[name_var][node.name] = node.get_used_cells()
+	print(tile_dynamic[name_var])
+	save_data()

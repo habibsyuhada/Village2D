@@ -18,3 +18,9 @@ func _ready():
 
 func _on_Close_Menu_Button_button_up():
 	GUI.open_hud()
+
+
+func _on_Save_Menu_Button_button_up():
+	var map = get_node_or_null("/root/World")
+	if map:
+		Global.save_dynamic_node(map)
