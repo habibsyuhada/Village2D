@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://assets/character/player.png" type="Texture" id=1]
 [ext_resource path="res://scene/characters/Player.gd" type="Script" id=2]
@@ -261,6 +261,174 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=119]
+resource_name = "Seed_Down"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 32, 39 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "seeding_process"
+} ]
+}
+
+[sub_resource type="Animation" id=120]
+resource_name = "Seed_Left"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 24, 30 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "seeding_process"
+} ]
+}
+
+[sub_resource type="Animation" id=121]
+resource_name = "Seed_Right"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 24, 30 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "seeding_process"
+} ]
+}
+
+[sub_resource type="Animation" id=122]
+resource_name = "Seed_Up"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 40, 47 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "seeding_process"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -543,6 +711,18 @@ animation = "Idle_Right"
 [sub_resource type="AnimationNodeAnimation" id=64]
 animation = "Idle_Up"
 
+[sub_resource type="AnimationNodeAnimation" id=123]
+animation = "Seed_Down"
+
+[sub_resource type="AnimationNodeAnimation" id=124]
+animation = "Seed_Left"
+
+[sub_resource type="AnimationNodeAnimation" id=125]
+animation = "Seed_Right"
+
+[sub_resource type="AnimationNodeAnimation" id=126]
+animation = "Seed_Up"
+
 [sub_resource type="AnimationNodeAnimation" id=66]
 animation = "Walk_Down"
 
@@ -643,6 +823,30 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=129]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=130]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=131]
+switch_mode = 1
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=132]
+switch_mode = 1
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=133]
+switch_mode = 1
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=134]
+switch_mode = 1
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=58]
 states/Hoe_Down/node = SubResource( 97 )
 states/Hoe_Down/position = Vector2( -620.876, -378.879 )
@@ -660,6 +864,14 @@ states/Idle_Right/node = SubResource( 63 )
 states/Idle_Right/position = Vector2( -45.7652, -504.889 )
 states/Idle_Up/node = SubResource( 64 )
 states/Idle_Up/position = Vector2( -1230.21, -505.333 )
+states/Seed_Down/node = SubResource( 123 )
+states/Seed_Down/position = Vector2( -772.973, -378.767 )
+states/Seed_Left/node = SubResource( 124 )
+states/Seed_Left/position = Vector2( 353.693, -382.615 )
+states/Seed_Right/node = SubResource( 125 )
+states/Seed_Right/position = Vector2( -196.709, -381.083 )
+states/Seed_Up/node = SubResource( 126 )
+states/Seed_Up/position = Vector2( -1364.19, -374.319 )
 states/Walk_Down/node = SubResource( 66 )
 states/Walk_Down/position = Vector2( -619.317, -638.223 )
 states/Walk_Left/node = SubResource( 67 )
@@ -676,9 +888,9 @@ states/Watering_Right/node = SubResource( 109 )
 states/Watering_Right/position = Vector2( 116.027, -381.041 )
 states/Watering_Up/node = SubResource( 110 )
 states/Watering_Up/position = Vector2( -1082.64, -373.875 )
-transitions = [ "Walk_Up", "Idle_Up", SubResource( 70 ), "Idle_Up", "Walk_Up", SubResource( 71 ), "Walk_Right", "Idle_Right", SubResource( 74 ), "Idle_Right", "Walk_Right", SubResource( 75 ), "Idle_Left", "Walk_Left", SubResource( 76 ), "Walk_Left", "Idle_Left", SubResource( 77 ), "Walk_Up", "Walk_Down", SubResource( 82 ), "Walk_Down", "Walk_Right", SubResource( 83 ), "Walk_Right", "Walk_Left", SubResource( 84 ), "Walk_Left", "Walk_Right", SubResource( 85 ), "Walk_Right", "Walk_Down", SubResource( 86 ), "Walk_Down", "Walk_Up", SubResource( 87 ), "Walk_Down", "Idle_Down", SubResource( 89 ), "Idle_Down", "Walk_Down", SubResource( 90 ), "Idle_Right", "Hoe_Right", SubResource( 91 ), "Idle_Left", "Hoe_Left", SubResource( 92 ), "Hoe_Right", "Idle_Right", SubResource( 93 ), "Hoe_Left", "Idle_Left", SubResource( 94 ), "Hoe_Up", "Idle_Up", SubResource( 99 ), "Hoe_Down", "Idle_Down", SubResource( 100 ), "Idle_Up", "Hoe_Up", SubResource( 101 ), "Idle_Down", "Hoe_Down", SubResource( 102 ), "Idle_Up", "Watering_Up", SubResource( 111 ), "Idle_Down", "Watering_Down", SubResource( 112 ), "Idle_Right", "Watering_Right", SubResource( 113 ), "Idle_Left", "Watering_Left", SubResource( 114 ), "Watering_Up", "Idle_Up", SubResource( 115 ), "Watering_Down", "Idle_Down", SubResource( 116 ), "Watering_Right", "Idle_Right", SubResource( 117 ), "Watering_Left", "Idle_Left", SubResource( 118 ) ]
+transitions = [ "Walk_Up", "Idle_Up", SubResource( 70 ), "Idle_Up", "Walk_Up", SubResource( 71 ), "Walk_Right", "Idle_Right", SubResource( 74 ), "Idle_Right", "Walk_Right", SubResource( 75 ), "Idle_Left", "Walk_Left", SubResource( 76 ), "Walk_Left", "Idle_Left", SubResource( 77 ), "Walk_Up", "Walk_Down", SubResource( 82 ), "Walk_Down", "Walk_Right", SubResource( 83 ), "Walk_Right", "Walk_Left", SubResource( 84 ), "Walk_Left", "Walk_Right", SubResource( 85 ), "Walk_Right", "Walk_Down", SubResource( 86 ), "Walk_Down", "Walk_Up", SubResource( 87 ), "Walk_Down", "Idle_Down", SubResource( 89 ), "Idle_Down", "Walk_Down", SubResource( 90 ), "Idle_Right", "Hoe_Right", SubResource( 91 ), "Idle_Left", "Hoe_Left", SubResource( 92 ), "Hoe_Right", "Idle_Right", SubResource( 93 ), "Hoe_Left", "Idle_Left", SubResource( 94 ), "Hoe_Up", "Idle_Up", SubResource( 99 ), "Hoe_Down", "Idle_Down", SubResource( 100 ), "Idle_Up", "Hoe_Up", SubResource( 101 ), "Idle_Down", "Hoe_Down", SubResource( 102 ), "Idle_Up", "Watering_Up", SubResource( 111 ), "Idle_Down", "Watering_Down", SubResource( 112 ), "Idle_Right", "Watering_Right", SubResource( 113 ), "Idle_Left", "Watering_Left", SubResource( 114 ), "Watering_Up", "Idle_Up", SubResource( 115 ), "Watering_Down", "Idle_Down", SubResource( 116 ), "Watering_Right", "Idle_Right", SubResource( 117 ), "Watering_Left", "Idle_Left", SubResource( 118 ), "Idle_Up", "Seed_Up", SubResource( 127 ), "Idle_Down", "Seed_Down", SubResource( 128 ), "Idle_Right", "Seed_Right", SubResource( 129 ), "Idle_Left", "Seed_Left", SubResource( 130 ), "Seed_Left", "Idle_Left", SubResource( 131 ), "Seed_Right", "Idle_Right", SubResource( 132 ), "Seed_Down", "Idle_Down", SubResource( 133 ), "Seed_Up", "Idle_Up", SubResource( 134 ) ]
 start_node = "Idle_Down"
-graph_offset = Vector2( -1345.64, -708.881 )
+graph_offset = Vector2( -1897.87, -688.881 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=59]
 
@@ -706,6 +918,10 @@ anims/Idle_Down = SubResource( 6 )
 anims/Idle_Left = SubResource( 7 )
 anims/Idle_Right = SubResource( 8 )
 anims/Idle_Up = SubResource( 9 )
+anims/Seed_Down = SubResource( 119 )
+anims/Seed_Left = SubResource( 120 )
+anims/Seed_Right = SubResource( 121 )
+anims/Seed_Up = SubResource( 122 )
 anims/Walk_Down = SubResource( 2 )
 anims/Walk_Left = SubResource( 3 )
 anims/Walk_Right = SubResource( 4 )

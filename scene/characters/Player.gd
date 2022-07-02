@@ -11,6 +11,7 @@ var dir_last = Vector2.DOWN
 var state_anim_machine
 var isinaction = false
 export (PackedScene) var Indicator
+export (PackedScene) var Crop
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,6 +58,8 @@ func _physics_process(delta):
 			state_anim_machine.travel(str("Hoe_" + dir_animation))
 		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "watercan" :
 			state_anim_machine.travel(str("Watering_" + dir_animation))
+		if "seed" in Global.inventory[Global.player["item_index_used"]]["item_id"] :
+			state_anim_machine.travel(str("Seed_" + dir_animation))
 	if !isinaction:
 		velocity = direction.normalized() * cur_speed * delta
 		move_and_slide(velocity)
@@ -91,4 +94,10 @@ func watering_process():
 	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [1] and Global.world_tile_lv3.get_cell(map_tile.x, map_tile.y) in [-1]):
 		Global.world_tile_lv3.set_cell(map_tile.x, map_tile.y, 2)
 		Global.world_tile_lv3.update_bitmask_area (map_tile)
+	isinaction = false
+
+func seeding_process():
+	var map_tile = Global.world_tile_lv3.world_to_map(Global.indicator_player.position)
+	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [1] and Global.world_tile_lv3.get_cell(map_tile.x, map_tile.y) in [2]):
+		pass
 	isinaction = false

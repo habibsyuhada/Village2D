@@ -81,6 +81,7 @@ func save_data():
 		"player": player,
 		"inventory": inventory,
 		"map_dynamic": map_dynamic,
+		"tile_dynamic": tile_dynamic,
 	}
 	
 	var file = File.new()
@@ -98,6 +99,7 @@ func load_games_process():
 		player = save_file["player"]
 		inventory = save_file["inventory"]
 		map_dynamic = save_file["map_dynamic"]
+		tile_dynamic = save_file["tile_dynamic"]
 		goto_scene(player["map_file"])
 		print("GAME FILE LOADED")
 
@@ -186,7 +188,9 @@ func load_dynamic_node(name_var):
 		for key in tile_dynamic[name_var].keys():
 			var node = get_node_or_null("/root/World/Navigation2D").find_node(key)
 			if node:
-				pass
+				for cell_arr in tile_dynamic[name_var][key]:
+					node.set_cellv(cell_arr[0], cell_arr[1])
+					node.update_bitmask_area(cell_arr[0])
 
 func save_dynamic_node(map):
 	player["map_file"] = map.get_filename()
@@ -208,6 +212,7 @@ func save_dynamic_node(map):
 	if nav2d:
 		tile_dynamic[name_var]  = {}
 		for node in nav2d.get_children():
-			tile_dynamic[name_var][node.name] = node.get_used_cells()
-	print(tile_dynamic[name_var])
+			tile_dynamic[name_var][node.name] = []
+			for cell_pos in node.get_used_cells():
+				tile_dynamic[name_var][node.name].push_back([cell_pos, node.get_cellv(cell_pos)])
 	save_data()
