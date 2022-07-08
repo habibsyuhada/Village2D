@@ -53,13 +53,16 @@ func _physics_process(delta):
 			take_item.interact()
 #		isinaction = true
 	if Input.is_action_just_released("Space"):
-		isinaction = true
-		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "hoe" :
-			state_anim_machine.travel(str("Hoe_" + dir_animation))
-		if Global.inventory[Global.player["item_index_used"]]["item_id"] == "watercan" :
-			state_anim_machine.travel(str("Watering_" + dir_animation))
-		if "seed" in Global.inventory[Global.player["item_index_used"]]["item_id"] :
-			state_anim_machine.travel(str("Seed_" + dir_animation))
+		if !isinaction and Global.inventory[Global.player["item_index_used"]]["item_id"] != null:
+			isinaction = true
+			print("ASD1")
+			if Global.inventory[Global.player["item_index_used"]]["item_id"] == "hoe" :
+				state_anim_machine.travel(str("Hoe_" + dir_animation))
+			if Global.inventory[Global.player["item_index_used"]]["item_id"] == "watercan" :
+				state_anim_machine.travel(str("Watering_" + dir_animation))
+			if "seed" in Global.inventory[Global.player["item_index_used"]]["item_id"] :
+				print("ASD2")
+				state_anim_machine.travel(str("Seed_" + dir_animation))
 	if !isinaction:
 		velocity = direction.normalized() * cur_speed * delta
 		move_and_slide(velocity)
@@ -97,7 +100,12 @@ func watering_process():
 	isinaction = false
 
 func seeding_process():
+	print("ASD3")
 	var map_tile = Global.world_tile_lv3.world_to_map(Global.indicator_player.position)
-	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [1] and Global.world_tile_lv3.get_cell(map_tile.x, map_tile.y) in [2]):
-		pass
+	if(Global.world_tile_lv2.get_cell(map_tile.x, map_tile.y) in [1]):
+		var temp_crop = Crop.instance()
+		temp_crop.position = $"/root/World/Indicator".position
+		temp_crop.time_start = OS.get_unix_time()
+		temp_crop.id_crop = MasterItem.master_item[Global.inventory[Global.player["item_index_used"]]["item_id"]]['id_crop']
+		$"/root/World/Crops".add_child(temp_crop)
 	isinaction = false

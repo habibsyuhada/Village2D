@@ -56,7 +56,7 @@ func new_games_process():
 		"item_qty": 1,
 	}
 	temp_slot[3] = {
-		"item_id": "wortelseed",
+		"item_id": "carrotseed",
 		"item_qty": 1,
 	}
 	map_dynamic = {

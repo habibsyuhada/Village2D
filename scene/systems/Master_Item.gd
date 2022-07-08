@@ -12,17 +12,6 @@ func _ready():
 	add_master_item()
 	add_master_crop()
 
-func add_master_crop():
-	add_data_crop({
-		"key": "carrot",
-		"name": "Carrot",
-		"sprite_plant" : "carrot",
-		"consumable" : 1,
-		"days_grow" : 4,
-		"price" : 25,
-		"sell_price" : 40,
-	})
-
 func add_master_item():
 	add_data_item({
 		"key": "hoe",
@@ -37,12 +26,12 @@ func add_master_item():
 		"consumable" : 0,
 	})
 	add_data_item({
-		"key": "wortelseed",
-		"name": "Wortel Seed",
+		"key": "carrotseed",
+		"name": "Carrot Seed",
 		"sprite": "res://assets/tools/Wortel Seed.png",
 		"consumable" : 1,
+		"id_crop" : "carrot",
 	})
-
 
 func add_data_item(data):
 	if data.has("key") :
@@ -50,6 +39,7 @@ func add_data_item(data):
 			"name" : "",
 			"sprite" : null,
 			"consumable" : 0,
+			"id_crop" : null,
 		}
 		for form in form_data.keys():
 			if data.has(form) :
@@ -59,13 +49,24 @@ func add_data_item(data):
 		for form in form_data.keys():
 			master_item[data["key"]][form] = form_data[form]
 
+func add_master_crop():
+	add_data_crop({
+		"key": "carrot",
+		"name": "Carrot",
+		"sprite_plant" : "carrot",
+		"consumable" : 1,
+		"second_full_grow" : 15,
+		"price" : 25,
+		"sell_price" : 40,
+	})
+
 func add_data_crop(data):
 	if data.has("key") :
 		var form_data = {
 			"name" : "",
 			"sprite_plant" : "",
 			"consumable" : 0,
-			"days_grow" : 0,
+			"second_full_grow" : 0,
 			"price" : 0,
 			"sell_price" : 0,
 		}
@@ -73,6 +74,6 @@ func add_data_crop(data):
 			if data.has(form) :
 				form_data[form] = data[form]
 		
-		master_item[data["key"]] = {}
+		master_crop[data["key"]] = {}
 		for form in form_data.keys():
-			master_item[data["key"]][form] = form_data[form]
+			master_crop[data["key"]][form] = form_data[form]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/crops/carrot3.png" type="Texture" id=1]
 [ext_resource path="res://assets/crops/carrot2.png" type="Texture" id=2]
 [ext_resource path="res://assets/crops/carrot4.png" type="Texture" id=3]
 [ext_resource path="res://assets/crops/carrot1.png" type="Texture" id=4]
+[ext_resource path="res://scene/objects/Crop.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -17,10 +18,15 @@ animations = [ {
 } ]
 
 [node name="Crop" type="StaticBody2D"]
+script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -4 )
+scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 2 )
 animation = "Carrot"
